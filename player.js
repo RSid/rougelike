@@ -45,12 +45,18 @@ Player.prototype.handleEvent = function(e) {
 
 Player.prototype._checkBox = function() {
     var key = this._x + "," + this._y;
-    if (Game.map[key] != "*") {
-        alert("There is no box here!");
+    if (Game.map[key] != "*" && Game.map[key] != "H") {
+        alert("There is nothing to do here!");
     } else if (key == Game.ananas) {
         Game.display.drawText(1,  H, "Hooray! You reached the McGuffin before your doom.");
         Game.engine.lock();
         window.removeEventListener("keydown", this);
+    }
+    else if(Game.doors.indexOf(key) >= 0){
+      Game._destroyMap();
+      Game._generateMap();
+      Game._placeBeing(this);
+      this._draw();
     } else {
         Game.display.drawText(1,  H, "This box is empty :-(");
     }

@@ -33,5 +33,5 @@ Enemy.prototype.act = function() {
 }
 
 Enemy.prototype._draw = function() {
-    Game.display.draw(this._x, this._y, "P", "red");
+    Game.display.draw(this._x, this._y, "E", "red");
 }
