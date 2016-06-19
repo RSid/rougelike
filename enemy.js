@@ -21,7 +21,7 @@ Enemy.prototype.act = function() {
     path.shift(); /* remove Enemy's position */
     if (path.length <= 1) {
         Game.engine.lock();
-        Game.display.drawText(1,  H, "Game over - you were captured by Enemy!");
+        Game.display.drawText(W - 1,  1, "%b{ red }Oh god- ", 10);
     } else {
         x = path[0][0];
         y = path[0][1];

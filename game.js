@@ -8,7 +8,7 @@ var Game = {
     doors: new Array(),
 
     init: function() {
-        this.display = new ROT.Display({width: W, height: H + 5});
+        this.display = new ROT.Display({width: W + 10, height: H});
         document.body.appendChild(this.display.getContainer());
         this.scheduler = new ROT.Scheduler.Simple();
 
@@ -18,6 +18,8 @@ var Game = {
 
         this.engine = new ROT.Engine(this.scheduler);
         this.engine.start();
+
+        Game.display.drawText(W - 1,  1, "%b{ purple }It's dark down here.", 10);
     },
 
     _generateMap: function() {
