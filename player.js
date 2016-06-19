@@ -53,9 +53,7 @@ Player.prototype._checkBox = function() {
         window.removeEventListener("keydown", this);
     }
     else if(Game.doors.indexOf(key) >= 0){
-      Game._destroyMap();
-      Game._generateMap();
-      Game._placeBeing(this);
+      Game._moveLevels(this);
       this._draw();
     } else {
         Game.display.drawText(1,  H, "This box is empty :-(");

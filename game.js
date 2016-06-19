@@ -10,14 +10,11 @@ var Game = {
     init: function() {
         this.display = new ROT.Display({width: W, height: H + 5});
         document.body.appendChild(this.display.getContainer());
+        this.scheduler = new ROT.Scheduler.Simple();
 
         this._generateMap();
         this.player = this._createBeing(Player);
-        this.enemy = this._createBeing(Enemy);
-
-        this.scheduler = new ROT.Scheduler.Simple();
         this.scheduler.add(this.player, true);
-        this.scheduler.add(this.enemy, true);
 
         this.engine = new ROT.Engine(this.scheduler);
         this.engine.start();
@@ -39,10 +36,18 @@ var Game = {
         this._generateBoxes(this.freeCells);
         this._generateDoors(this.freeCells);
         this._drawWholeMap();
+
+        this.enemy = this._createBeing(Enemy);
+        this.scheduler.add(this.enemy, true);
+    },
+
+    _moveLevels: function(player) {
+      Game._destroyMap();
+      Game._generateMap();
+      Game._placeBeing(player);
     },
 
     _destroyMap: function() {
-
       if(this.enemy) {
         Game.display.draw(this.enemy._x, this.enemy._y, Game.map[this.enemy._x+","+this.enemy._y]);
         this.scheduler.remove(this.enemy);
@@ -106,7 +111,7 @@ var Game = {
         var x = parseInt(parts[0]);
         var y = parseInt(parts[1]);
         this.display.draw(x, y, "");
-        }
+      }
     }
 
 };
